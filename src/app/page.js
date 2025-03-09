@@ -21,7 +21,7 @@ const App = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
       <header className="w-full flex justify-end items-center p-4 space-x-4">
-        <div className="relative">
+        <div className="relative z-50">
           <button
             onClick={() => setShowVolumeDropdown(!showVolumeDropdown)}
             className="flex items-center h-8 p-1 bg-gray-200 dark:bg-gray-700 rounded-full shadow-lg"
