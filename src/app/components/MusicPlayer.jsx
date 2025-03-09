@@ -9,19 +9,9 @@ const MusicPlayer = ({ volume }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
-
-  const togglePlay = () => {
-    if (!audioRef.current) return;
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play().catch((err) => console.error(err));
-    }
-    setIsPlaying(!isPlaying);
-  };
-
   useEffect(() => {
     const audio = new Audio(window.location.origin + "/rickroll.mp3");
+
     audioRef.current = audio;
     audio.loop = true;
 
@@ -46,9 +36,21 @@ const MusicPlayer = ({ volume }) => {
 
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = volume;
+      // Eğer volume değeri undefined veya 0 ise varsayılan olarak 0.2 ata
+      const initialVolume = volume === undefined || volume === 0 ? 0.2 : volume;
+      audioRef.current.volume = initialVolume;
     }
   }, [volume]);
+
+  const togglePlay = () => {
+    if (!audioRef.current) return;
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play().catch((err) => console.error(err));
+    }
+    setIsPlaying(!isPlaying);
+  };
 
   const formatTime = (time) => {
     if (!time || isNaN(time)) return "0:00";
@@ -61,10 +63,9 @@ const MusicPlayer = ({ volume }) => {
 
   return (
     <div className="w-full max-w-sm bg-gray-200 dark:bg-gray-800 rounded-lg shadow-lg p-6 flex flex-col items-center space-y-4">
-
       <div className="text-center">
         <h2 className="text-lg text-black dark:text-white font-bold">Never Gonna Give You Up</h2>
-        <p className="text-sm  text-gray-500 dark:rext-gray-400">Rick Astley</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400">Rick Astley</p>
       </div>
 
       <div className="w-full flex items-center space-x-2">
