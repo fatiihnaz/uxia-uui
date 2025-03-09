@@ -21,7 +21,7 @@ const MusicPlayer = ({ volume }) => {
   };
 
   useEffect(() => {
-    const audio = new Audio("/rickroll.mp3");
+    const audio = new Audio(window.location.origin + "/rickroll.mp3");
     audioRef.current = audio;
     audio.loop = true;
 
